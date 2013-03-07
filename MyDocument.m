@@ -73,6 +73,8 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 		_soundOn = YES;
 		_appendMark = YES;
 		_navigatePackages = YES;
+		
+		[_savePanel setTreatsFilePackagesAsDirectories:_navigatePackages];
 	}
 	
 	return self;
@@ -197,7 +199,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 // prepareSavePanel:inSavePanel:
 // -------------------------------------------------------------------------------
-// Invoked by runModalSavePanel to do any customization of the Save panel _savePanel.
+// Invoked by runModalSavePanel to do any customization of the Save panel savePanel.
 //
 - (BOOL)prepareSavePanel:(NSSavePanel *)inSavePanel
 {
@@ -214,7 +216,8 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	[inSavePanel setAllowedFileTypes:[NSArray arrayWithObjects:(NSString *)kUTTypeRTF, nil]];
 	[inSavePanel setNameFieldLabel:@"FILE NAME:"];            // override the file name label
 
-	_savePanel = inSavePanel;    // keep track of the save panel for later
+	self.savePanel = inSavePanel;    // keep track of the save panel for later
+	[_savePanel setTreatsFilePackagesAsDirectories:_navigatePackages];
 
 	return YES;
 }
@@ -344,7 +347,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (IBAction)filePackagesAsDirAction:(id)sender
 {
-	[_savePanel setTreatsFilePackagesAsDirectories:[sender state]];
+	[_savePanel setTreatsFilePackagesAsDirectories:_navigatePackages];
 }
 
 @end
