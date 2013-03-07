@@ -94,12 +94,12 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	[textView setFrame:frameRect];
 
 	[textView setMinSize:NSMakeSize(contentSize.width, contentSize.height)];
-	[textView setMaxSize:NSMakeSize(FLT_MAX, FLT_MAX)];
+	[textView setMaxSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];
 	
 	[textView setVerticallyResizable:YES];
 	[textView setHorizontallyResizable:YES];	// for horizontal scrolling
 	[textView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];	// for horizontal scrolling
-	[[textView textContainer] setContainerSize:NSMakeSize(FLT_MAX,FLT_MAX)];	// for horizontal scrolling
+	[[textView textContainer] setContainerSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];	// for horizontal scrolling
 	[[textView textContainer] setWidthTracksTextView:NO];						// for horizontal scrolling
 
 	[scrollview setDocumentView:textView];
