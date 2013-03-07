@@ -52,7 +52,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 @interface MyDocument : NSDocument <NSOpenSavePanelDelegate>
 {
-    id					textView;
+    NSTextView*			textView;
     NSData*				model;
 	
 	NSSavePanel*		savePanel;
