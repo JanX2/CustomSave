@@ -112,11 +112,11 @@ const int kBadFileName			= 1001;
 {
 	[super windowControllerDidLoadNib:aController];
 
-	// Add any code here that need to be executed once the windowController has loaded the document's window.
-	// ..
+	// Add any code here that needs to be executed once the windowController has loaded the document's window.
+	// ...
 
-	// the following code adds the horizontal scroll bar to the scroll view and makes the text view horizontally
-	// resizable so it can display text of any width:
+	// the following code adds the horizontal scroll bar to the scroll view and makes the text view 
+	// horizontally resizable so it can display text of any width:
 	//
 	NSRect frameRect;
 	NSWindow *theWindow = [(NSView *)_textView window];
