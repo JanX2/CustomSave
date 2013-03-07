@@ -80,7 +80,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	NSRect		frameRect;
 	NSWindow*	theWindow = [(NSView*)textView window];
 	
-	frameRect = [(NSView*)textView frame];
+	//frameRect = [(NSView*)textView frame];
 
 	NSScrollView* scrollview = [textView enclosingScrollView];
 	
@@ -276,7 +276,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 			[returnFileName insertString:@"!" atIndex:searchRange.location];
 		else
 			[returnFileName appendString:@"!"];
-		return returnFileName;
+		return [returnFileName autorelease];
 	}
 	return filename;
 }
