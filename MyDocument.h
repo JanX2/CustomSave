@@ -51,14 +51,14 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 #import <Cocoa/Cocoa.h>
 
 @interface MyDocument : NSDocument <NSOpenSavePanelDelegate> {
-	NSTextView *textView;
-	NSData *model;
+	NSTextView *_textView;
+	NSData *_model;
 
-	NSSavePanel *savePanel;
-	IBOutlet NSView *saveDialogCustomView;
-	IBOutlet NSButton *soundOnCheck;
-	IBOutlet NSButton *appendCheck;
-	IBOutlet NSButton *navigatePackages;
+	NSSavePanel *_savePanel;
+	IBOutlet NSView *_saveDialogCustomView;
+	IBOutlet NSButton *_soundOnCheck;
+	IBOutlet NSButton *_appendCheck;
+	IBOutlet NSButton *_navigatePackages;
 }
 
 - (IBAction)filePackagesAsDirAction:(id)sender;

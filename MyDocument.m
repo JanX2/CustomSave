@@ -78,11 +78,11 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	// resizable so it can display text of any width:
 	//
 	NSRect frameRect;
-	NSWindow *theWindow = [(NSView *)textView window];
+	NSWindow *theWindow = [(NSView *)_textView window];
 
-	//frameRect = [(NSView*)textView frame];
+	//frameRect = [(NSView*)_textView frame];
 
-	NSScrollView *scrollview = [textView enclosingScrollView];
+	NSScrollView *scrollview = [_textView enclosingScrollView];
 
 	NSSize contentSize = [scrollview contentSize];
 	[scrollview setBorderType:NSNoBorder];
@@ -91,21 +91,21 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 	[scrollview setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 	frameRect = NSMakeRect(0, 0, contentSize.width, contentSize.height);
-	[textView setFrame:frameRect];
+	[_textView setFrame:frameRect];
 
-	[textView setMinSize:NSMakeSize(contentSize.width, contentSize.height)];
-	[textView setMaxSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];
+	[_textView setMinSize:NSMakeSize(contentSize.width, contentSize.height)];
+	[_textView setMaxSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];
 
-	[textView setVerticallyResizable:YES];
-	[textView setHorizontallyResizable:YES];    // for horizontal scrolling
-	[textView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];    // for horizontal scrolling
-	[[textView textContainer] setContainerSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];    // for horizontal scrolling
-	[[textView textContainer] setWidthTracksTextView:NO];                        // for horizontal scrolling
+	[_textView setVerticallyResizable:YES];
+	[_textView setHorizontallyResizable:YES];    // for horizontal scrolling
+	[_textView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];    // for horizontal scrolling
+	[[_textView textContainer] setContainerSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];    // for horizontal scrolling
+	[[_textView textContainer] setWidthTracksTextView:NO];                        // for horizontal scrolling
 
-	[scrollview setDocumentView:textView];
+	[scrollview setDocumentView:_textView];
 	[theWindow setContentView:scrollview];
 	[theWindow makeKeyAndOrderFront:nil];
-	[theWindow makeFirstResponder:textView];
+	[theWindow makeFirstResponder:_textView];
 
 	[self updateView];
 }
@@ -117,7 +117,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 {
 	// return a data object that contains the contents of the document
 	[self updateModel];
-	return model;
+	return _model;
 }
 
 // -------------------------------------------------------------------------------
@@ -132,11 +132,11 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 }
 
 // -------------------------------------------------------------------------------
-// model:
+// _model:
 // -------------------------------------------------------------------------------
 - (NSData *)model
 {
-	return model;
+	return _model;
 }
 
 // -------------------------------------------------------------------------------
@@ -145,8 +145,8 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 - (void)setModel:(NSData *)value
 {
 	[value retain];
-	[model release];
-	model = value;
+	[_model release];
+	_model = value;
 }
 
 // -------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 - (NSRange)entireRange
 {
-	return NSMakeRange(0, [[textView string] length]);
+	return NSMakeRange(0, [[_textView string] length]);
 }
 
 // -------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 - (void)updateModel
 {
-	[self setModel:[textView RTFFromRange:[self entireRange]]];
+	[self setModel:[_textView RTFFromRange:[self entireRange]]];
 }
 
 // -------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 - (void)updateView
 {
-	[textView replaceCharactersInRange:[self entireRange] withRTF:[self model]];
+	[_textView replaceCharactersInRange:[self entireRange] withRTF:[self model]];
 }
 
 
@@ -179,7 +179,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 // prepareSavePanel:inSavePanel:
 // -------------------------------------------------------------------------------
-// Invoked by runModalSavePanel to do any customization of the Save panel savePanel.
+// Invoked by runModalSavePanel to do any customization of the Save panel _savePanel.
 //
 - (BOOL)prepareSavePanel:(NSSavePanel *)inSavePanel
 {
@@ -192,11 +192,11 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	[inSavePanel setDelegate:self];    // allows us to be notified of save panel events
 
 	[inSavePanel setMessage:@"This is a customized save dialog for saving text files:"];
-	[inSavePanel setAccessoryView:saveDialogCustomView];    // add our custom view
+	[inSavePanel setAccessoryView:_saveDialogCustomView];    // add our custom view
 	[inSavePanel setAllowedFileTypes:[NSArray arrayWithObjects:(NSString *)kUTTypePlainText, nil]];
 	[inSavePanel setNameFieldLabel:@"FILE NAME:"];            // override the file name label
 
-	savePanel = inSavePanel;    // keep track of the save panel for later
+	_savePanel = inSavePanel;    // keep track of the save panel for later
 
 	return YES;
 }
@@ -264,7 +264,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
 {
-	if (okFlag && [appendCheck state]) {
+	if (okFlag && [_appendCheck state]) {
 		NSString *fileBaseName = [filename stringByDeletingPathExtension];
 		NSString *fileNameExtension = [filename pathExtension];
 		return [[fileBaseName stringByAppendingString:@"!"] stringByAppendingPathExtension:fileNameExtension];
@@ -282,7 +282,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panel:(id)sender willExpand:(BOOL)expanding
 {
-	if ([soundOnCheck state]) {
+	if ([_soundOnCheck state]) {
 		if (expanding)
 			[[NSSound soundNamed:@"Pop"] play];
 		else
@@ -290,7 +290,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	}
 
 	// package navigation doesn't apply for the shrunk/simple dialog
-	[navigatePackages setHidden:!expanding];
+	[_navigatePackages setHidden:!expanding];
 }
 
 // -------------------------------------------------------------------------------
@@ -302,7 +302,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panel:(id)sender directoryDidChange:(NSString *)path
 {
-	if ([soundOnCheck state])
+	if ([_soundOnCheck state])
 		[[NSSound soundNamed:@"Frog"] play];
 }
 
@@ -315,7 +315,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panelSelectionDidChange:(id)sender
 {
-	if ([soundOnCheck state])
+	if ([_soundOnCheck state])
 		[[NSSound soundNamed:@"Hero"] play];
 }
 
@@ -326,7 +326,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (IBAction)filePackagesAsDirAction:(id)sender
 {
-	[savePanel setTreatsFilePackagesAsDirectories:[sender state]];
+	[_savePanel setTreatsFilePackagesAsDirectories:[sender state]];
 }
 
 @end

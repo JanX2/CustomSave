@@ -319,7 +319,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">textView</string>
+						<string key="label">_textView</string>
 						<reference key="source" ref="62197679"/>
 						<reference key="destination" ref="545011924"/>
 					</object>
@@ -327,7 +327,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">saveDialogCustomView</string>
+						<string key="label">_saveDialogCustomView</string>
 						<reference key="source" ref="62197679"/>
 						<reference key="destination" ref="685164118"/>
 					</object>
@@ -335,7 +335,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">soundOnCheck</string>
+						<string key="label">_soundOnCheck</string>
 						<reference key="source" ref="62197679"/>
 						<reference key="destination" ref="394214382"/>
 					</object>
@@ -343,7 +343,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">appendCheck</string>
+						<string key="label">_appendCheck</string>
 						<reference key="source" ref="62197679"/>
 						<reference key="destination" ref="167929422"/>
 					</object>
@@ -359,7 +359,7 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">navigatePackages</string>
+						<string key="label">_navigatePackages</string>
 						<reference key="source" ref="62197679"/>
 						<reference key="destination" ref="475404508"/>
 					</object>
@@ -543,26 +543,26 @@
 						</object>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="appendCheck">NSButton</string>
-						<string key="navigatePackages">NSButton</string>
-						<string key="saveDialogCustomView">NSView</string>
-						<string key="soundOnCheck">NSButton</string>
+						<string key="_appendCheck">NSButton</string>
+						<string key="_navigatePackages">NSButton</string>
+						<string key="_saveDialogCustomView">NSView</string>
+						<string key="_soundOnCheck">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="appendCheck">
-							<string key="name">appendCheck</string>
+						<object class="IBToOneOutletInfo" key="_appendCheck">
+							<string key="name">_appendCheck</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="navigatePackages">
-							<string key="name">navigatePackages</string>
+						<object class="IBToOneOutletInfo" key="_navigatePackages">
+							<string key="name">_navigatePackages</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="saveDialogCustomView">
-							<string key="name">saveDialogCustomView</string>
+						<object class="IBToOneOutletInfo" key="_saveDialogCustomView">
+							<string key="name">_saveDialogCustomView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="soundOnCheck">
-							<string key="name">soundOnCheck</string>
+						<object class="IBToOneOutletInfo" key="_soundOnCheck">
+							<string key="name">_soundOnCheck</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 					</dictionary>
