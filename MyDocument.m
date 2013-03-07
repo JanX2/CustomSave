@@ -183,7 +183,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 	[inSavePanel setMessage:@"This is a customized save dialog for saving text files:"];
 	[inSavePanel setAccessoryView:_saveDialogCustomView];    // add our custom view
-	[inSavePanel setAllowedFileTypes:[NSArray arrayWithObjects:(NSString *)kUTTypePlainText, nil]];
+	[inSavePanel setAllowedFileTypes:[NSArray arrayWithObjects:(NSString *)kUTTypeRTF, nil]];
 	[inSavePanel setNameFieldLabel:@"FILE NAME:"];            // override the file name label
 
 	_savePanel = inSavePanel;    // keep track of the save panel for later
