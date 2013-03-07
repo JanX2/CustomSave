@@ -56,9 +56,37 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 @synthesize model = _model;
 @synthesize savePanel = _savePanel;
 @synthesize saveDialogCustomView = _saveDialogCustomView;
+
 @synthesize soundOnCheck = _soundOnCheck;
 @synthesize appendCheck = _appendCheck;
+@synthesize navigatePackagesCheck = _navigatePackagesCheck;
+
+@synthesize soundOn = _soundOn;
+@synthesize appendMark = _appendMark;
 @synthesize navigatePackages = _navigatePackages;
+
+- (id)init
+{
+	self = [super init];
+	
+	if (nil != self) {
+		_soundOn = YES;
+		_appendMark = YES;
+		_navigatePackages = YES;
+	}
+	
+	return self;
+}
+
+- (void)dealloc
+{
+	[_model release];
+
+	[_savePanel release];
+	
+	[super dealloc];
+}
+
 
 // -------------------------------------------------------------------------------
 // windowNibName:
@@ -254,7 +282,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
 {
-	if (okFlag && [_appendCheck state]) {
+	if (okFlag && _appendMark) {
 		NSString *fileBaseName = [filename stringByDeletingPathExtension];
 		NSString *fileNameExtension = [filename pathExtension];
 		return [[fileBaseName stringByAppendingString:@"!"] stringByAppendingPathExtension:fileNameExtension];
@@ -272,7 +300,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panel:(id)sender willExpand:(BOOL)expanding
 {
-	if ([_soundOnCheck state]) {
+	if (_soundOn) {
 		if (expanding)
 			[[NSSound soundNamed:@"Pop"] play];
 		else
@@ -280,7 +308,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	}
 
 	// package navigation doesn't apply for the shrunk/simple dialog
-	[_navigatePackages setHidden:!expanding];
+	[_navigatePackagesCheck setHidden:!expanding];
 }
 
 // -------------------------------------------------------------------------------
@@ -292,7 +320,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panel:(id)sender directoryDidChange:(NSString *)path
 {
-	if ([_soundOnCheck state])
+	if (_soundOn)
 		[[NSSound soundNamed:@"Frog"] play];
 }
 
@@ -305,7 +333,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panelSelectionDidChange:(id)sender
 {
-	if ([_soundOnCheck state])
+	if (_soundOn)
 		[[NSSound soundNamed:@"Hero"] play];
 }
 

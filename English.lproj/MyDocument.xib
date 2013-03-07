@@ -18,6 +18,7 @@
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
 			<string>NSTextView</string>
+			<string>NSUserDefaultsController</string>
 			<string>NSView</string>
 			<string>NSWindowTemplate</string>
 		</array>
@@ -84,6 +85,7 @@
 											<string key="NSFrameSize">{490, 417}</string>
 											<reference key="NSSuperview" ref="821660157"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="773769904"/>
 											<object class="NSTextContainer" key="NSTextContainer" id="960035594">
 												<object class="NSLayoutManager" key="NSLayoutManager">
 													<object class="NSTextStorage" key="NSTextStorage">
@@ -191,6 +193,7 @@
 									<string key="NSFrame">{{491, 1}, {15, 417}}</string>
 									<reference key="NSSuperview" ref="341315779"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
 									<reference key="NSTarget" ref="341315779"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSCurValue">1</double>
@@ -201,6 +204,7 @@
 									<string key="NSFrame">{{-100, -100}, {87, 18}}</string>
 									<reference key="NSSuperview" ref="341315779"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="821660157"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="341315779"/>
 									<string key="NSAction">_doScroller:</string>
@@ -211,7 +215,7 @@
 							<string key="NSFrame">{{-1, 0}, {507, 419}}</string>
 							<reference key="NSSuperview" ref="415186699"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="821660157"/>
+							<reference key="NSNextKeyView" ref="310155969"/>
 							<int key="NSsFlags">2066</int>
 							<reference key="NSVScroller" ref="773769904"/>
 							<reference key="NSHScroller" ref="310155969"/>
@@ -221,6 +225,7 @@
 					<string key="NSFrameSize">{506, 418}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView" ref="341315779"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{94, 108}</string>
@@ -228,13 +233,15 @@
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSCustomView" id="685164118">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="394214382">
 						<reference key="NSNextResponder" ref="685164118"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrame">{{18, 58}, {134, 18}}</string>
 						<reference key="NSSuperview" ref="685164118"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="167929422"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="339333458">
 							<int key="NSCellFlags">-2080244224</int>
@@ -262,6 +269,8 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrame">{{18, 38}, {240, 18}}</string>
 						<reference key="NSSuperview" ref="685164118"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="475404508"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="22777903">
 							<int key="NSCellFlags">-2080244224</int>
@@ -283,6 +292,8 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrame">{{18, 18}, {181, 18}}</string>
 						<reference key="NSSuperview" ref="685164118"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="661956041">
 							<int key="NSCellFlags">-2080244224</int>
@@ -301,10 +312,16 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{276, 94}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="394214382"/>
 				<object class="NSMutableString" key="NSClassName">
 					<characters key="NS.bytes">NSView</characters>
 				</object>
 				<string key="NSExtension">NSResponder</string>
+			</object>
+			<object class="NSUserDefaultsController" id="376457998">
+				<bool key="NSSharedInstance">YES</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -359,11 +376,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">navigatePackages</string>
+						<string key="label">navigatePackagesCheck</string>
 						<reference key="source" ref="62197679"/>
 						<reference key="destination" ref="475404508"/>
 					</object>
-					<int key="connectionID">34</int>
+					<int key="connectionID">41</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -380,6 +397,54 @@
 						<reference key="destination" ref="545011924"/>
 					</object>
 					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: navigatePackages</string>
+						<reference key="source" ref="475404508"/>
+						<reference key="destination" ref="62197679"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="475404508"/>
+							<reference key="NSDestination" ref="62197679"/>
+							<string key="NSLabel">value: navigatePackages</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">navigatePackages</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: soundOn</string>
+						<reference key="source" ref="339333458"/>
+						<reference key="destination" ref="62197679"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="339333458"/>
+							<reference key="NSDestination" ref="62197679"/>
+							<string key="NSLabel">value: soundOn</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">soundOn</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">43</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: appendMark</string>
+						<reference key="source" ref="22777903"/>
+						<reference key="destination" ref="62197679"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="22777903"/>
+							<reference key="NSDestination" ref="62197679"/>
+							<string key="NSLabel">value: appendMark</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">appendMark</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">47</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -500,6 +565,11 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Application</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">44</int>
+						<reference key="object" ref="376457998"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -517,6 +587,7 @@
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="39.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
@@ -524,7 +595,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -544,17 +615,18 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="appendCheck">NSButton</string>
-						<string key="navigatePackages">NSButton</string>
+						<string key="navigatePackagesCheck">NSButton</string>
 						<string key="saveDialogCustomView">NSView</string>
 						<string key="soundOnCheck">NSButton</string>
+						<string key="textView">NSTextView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="appendCheck">
 							<string key="name">appendCheck</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="navigatePackages">
-							<string key="name">navigatePackages</string>
+						<object class="IBToOneOutletInfo" key="navigatePackagesCheck">
+							<string key="name">navigatePackagesCheck</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="saveDialogCustomView">
@@ -564,6 +636,10 @@
 						<object class="IBToOneOutletInfo" key="soundOnCheck">
 							<string key="name">soundOnCheck</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="textView">
+							<string key="name">textView</string>
+							<string key="candidateClassName">NSTextView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

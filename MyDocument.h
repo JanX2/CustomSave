@@ -56,9 +56,14 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 	NSSavePanel *_savePanel;
 	NSView *_saveDialogCustomView;
+	
 	NSButton *_soundOnCheck;
 	NSButton *_appendCheck;
-	NSButton *_navigatePackages;
+	NSButton *_navigatePackagesCheck;
+	
+	BOOL _soundOn;
+	BOOL _appendMark;
+	BOOL _navigatePackages;
 }
 
 @property (nonatomic, readwrite, assign) IBOutlet NSTextView *textView;
@@ -66,9 +71,15 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 @property (nonatomic, readwrite, retain) NSSavePanel *savePanel;
 @property (nonatomic, readwrite, assign) IBOutlet NSView *saveDialogCustomView;
+
 @property (nonatomic, readwrite, assign) IBOutlet NSButton *soundOnCheck;
 @property (nonatomic, readwrite, assign) IBOutlet NSButton *appendCheck;
-@property (nonatomic, readwrite, assign) IBOutlet NSButton *navigatePackages;
+@property (nonatomic, readwrite, assign) IBOutlet NSButton *navigatePackagesCheck;
+
+@property (nonatomic, readwrite) BOOL soundOn;
+@property (nonatomic, readwrite) BOOL appendMark;
+@property (nonatomic, readwrite) BOOL navigatePackages;
+
 
 - (IBAction)filePackagesAsDirAction:(id)sender;
 
