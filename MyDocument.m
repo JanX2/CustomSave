@@ -265,7 +265,7 @@ const int kBadFileName			= 1001;
 		NSString *fileName = [url lastPathComponent];
 		NSString *fileBaseName = [fileName stringByDeletingPathExtension];
 		
-		if ([fileBaseName isEqualToString:badName]) {
+		if ([fileBaseName isEqualToString:badName]) { // Won’t work with a trailing exclamation mark!
 			if (outError != NULL) {
 				NSString *errorFormatString = NSLocalizedString(@"Cannot save a file with the name “%@”. \nPlease pick another name.", @"Bad file name message");
 				NSString *errorDescription = [NSString stringWithFormat:errorFormatString, badName];
