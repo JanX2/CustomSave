@@ -110,7 +110,6 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	[self updateView];
 }
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 // -------------------------------------------------------------------------------
 // dataOfType:typeName:error
 // -------------------------------------------------------------------------------
@@ -120,19 +119,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	[self updateModel];
     return model;
 }
-#else
-// -------------------------------------------------------------------------------
-// dataRepresentationOfType:aType
-// -------------------------------------------------------------------------------
-- (NSData*)dataRepresentationOfType:(NSString*)aType
-{
-    // write your document from the given data
-	[self updateModel];
-    return model;
-}
-#endif
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 // -------------------------------------------------------------------------------
 // readFromData:data:typeName:error
 // -------------------------------------------------------------------------------
@@ -143,18 +130,6 @@ Copyright © 2007 Apple Inc., All Rights Reserved
     [self updateView];
     return YES;
 }
-#else
-// -------------------------------------------------------------------------------
-// loadDataRepresentation:ofType:aType
-// -------------------------------------------------------------------------------
-- (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString*)aType
-{
-    // read your document from the given data
-	[self setModel: data];
-    [self updateView];
-    return YES;
-}
-#endif
 
 // -------------------------------------------------------------------------------
 // model:
