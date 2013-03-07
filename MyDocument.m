@@ -50,6 +50,9 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 #import "MyDocument.h"
 
+NSString * const	CustomSaveErrorDomain						= @"com.apple.Error.CustomSave";
+const int kBadFileName			= 1001;
+
 @implementation MyDocument
 
 @synthesize textView = _textView;
@@ -240,7 +243,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 }
 
 // -------------------------------------------------------------------------------
-// isValidFilename:filename:
+// validateURL:error:
 // -------------------------------------------------------------------------------
 // Gives the delegate the opportunity to validate selected items.
 //
@@ -252,19 +255,28 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 // In this particular case: we arbitrary make sure the save dialog does not allow files named as "text"
 //
-- (BOOL)panel:(id)sender isValidFilename:(NSString *)filename
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
 {
 	BOOL result = YES;
 
-	NSURL *url = [NSURL fileURLWithPath:filename];
 	if (url && [url isFileURL]) {
-		NSArray *pathPieces = [[url path] pathComponents];
-		NSString *actualFilename = [pathPieces objectAtIndex:[pathPieces count] - 1];
-		if ([actualFilename isEqual:@"text.txt"]) {
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Cannot save a file with the name \"text\"."
-											 defaultButton:@"OK"
-										   alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please pick another name."];
-			[alert runModal];
+		NSString *badName = NSLocalizedString(@"text", @"Bad file name");
+		
+		NSString *fileName = [url lastPathComponent];
+		NSString *fileBaseName = [fileName stringByDeletingPathExtension];
+		
+		if ([fileBaseName isEqualToString:badName]) {
+			if (outError != NULL) {
+				NSString *errorFormatString = NSLocalizedString(@"Cannot save a file with the name “%@”. \nPlease pick another name.", @"Bad file name message");
+				NSString *errorDescription = [NSString stringWithFormat:errorFormatString, badName];
+				NSDictionary *errorDetail = [NSDictionary dictionaryWithObjectsAndKeys:
+											 errorDescription, NSLocalizedDescriptionKey,
+											 nil];
+				
+				*outError = [NSError errorWithDomain:CustomSaveErrorDomain
+												code:kBadFileName
+											userInfo:errorDetail];
+			}
 			result = NO;
 		}
 	}
@@ -315,13 +327,13 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 }
 
 // -------------------------------------------------------------------------------
-// directoryDidChange:path
+// didChangeToDirectoryURL:url
 // -------------------------------------------------------------------------------
 // Sent when the user has changed the selected directory in the NSSavePanel object sender.
 //
 // In this particular case, we have sound feedback for directory changes.
 //
-- (void)panel:(id)sender directoryDidChange:(NSString *)path
+- (void)panel:(id)sender didChangeToDirectoryURL:(NSURL *)url
 {
 	if (_soundOn)
 		[[NSSound soundNamed:@"Frog"] play];
