@@ -270,13 +270,9 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 {
 	if (okFlag && [appendCheck state])
 	{
-		NSMutableString* returnFileName = [[NSMutableString alloc] initWithString: filename];
-		NSRange searchRange = [returnFileName rangeOfString:@"."];
-		if (searchRange.length)
-			[returnFileName insertString:@"!" atIndex:searchRange.location];
-		else
-			[returnFileName appendString:@"!"];
-		return [returnFileName autorelease];
+		NSString* fileBaseName = [filename stringByDeletingPathExtension];
+		NSString* fileNameExtension = [filename pathExtension];
+		return [[fileBaseName stringByAppendingString:@"!"] stringByAppendingPathExtension:fileNameExtension];
 	}
 	return filename;
 }
