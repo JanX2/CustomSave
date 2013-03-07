@@ -261,9 +261,9 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 		NSArray *pathPieces = [[url path] pathComponents];
 		NSString *actualFilename = [pathPieces objectAtIndex:[pathPieces count] - 1];
 		if ([actualFilename isEqual:@"text.txt"]) {
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Cannot save a file name titled \"text\"."
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Cannot save a file with the name \"text\"."
 											 defaultButton:@"OK"
-										   alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please pick a new name."];
+										   alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please pick another name."];
 			[alert runModal];
 			result = NO;
 		}
