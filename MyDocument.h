@@ -55,17 +55,22 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	NSData *_model;
 
 	NSSavePanel *_savePanel;
-	IBOutlet NSView *_saveDialogCustomView;
-	IBOutlet NSButton *_soundOnCheck;
-	IBOutlet NSButton *_appendCheck;
-	IBOutlet NSButton *_navigatePackages;
+	NSView *_saveDialogCustomView;
+	NSButton *_soundOnCheck;
+	NSButton *_appendCheck;
+	NSButton *_navigatePackages;
 }
 
+@property (nonatomic, readwrite, assign) IBOutlet NSTextView *textView;
+@property (nonatomic, readwrite, retain) NSData *model;
+
+@property (nonatomic, readwrite, retain) NSSavePanel *savePanel;
+@property (nonatomic, readwrite, assign) IBOutlet NSView *saveDialogCustomView;
+@property (nonatomic, readwrite, assign) IBOutlet NSButton *soundOnCheck;
+@property (nonatomic, readwrite, assign) IBOutlet NSButton *appendCheck;
+@property (nonatomic, readwrite, assign) IBOutlet NSButton *navigatePackages;
+
 - (IBAction)filePackagesAsDirAction:(id)sender;
-
-- (NSData *)model;
-
-- (void)setModel:(NSData *)value;
 
 - (NSRange)entireRange;
 

@@ -52,6 +52,14 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 @implementation MyDocument
 
+@synthesize textView = _textView;
+@synthesize model = _model;
+@synthesize savePanel = _savePanel;
+@synthesize saveDialogCustomView = _saveDialogCustomView;
+@synthesize soundOnCheck = _soundOnCheck;
+@synthesize appendCheck = _appendCheck;
+@synthesize navigatePackages = _navigatePackages;
+
 // -------------------------------------------------------------------------------
 // windowNibName:
 // -------------------------------------------------------------------------------
@@ -129,24 +137,6 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	[self setModel:data];
 	[self updateView];
 	return YES;
-}
-
-// -------------------------------------------------------------------------------
-// _model:
-// -------------------------------------------------------------------------------
-- (NSData *)model
-{
-	return _model;
-}
-
-// -------------------------------------------------------------------------------
-// setModel:value
-// -------------------------------------------------------------------------------
-- (void)setModel:(NSData *)value
-{
-	[value retain];
-	[_model release];
-	_model = value;
 }
 
 // -------------------------------------------------------------------------------
