@@ -212,13 +212,13 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 	// If we don't set this, then the save panel will remember the last visited
 	// directory, which is generally preferred.
 	//
-	[inSavePanel setDirectory: NSHomeDirectory()];
+	[inSavePanel setDirectoryURL:[NSURL fileURLWithPath:NSHomeDirectory()]];
 	
 	[inSavePanel setDelegate: self];	// allows us to be notified of save panel events
 	
 	[inSavePanel setMessage:@"This is a customized save dialog for saving text files:"];
 	[inSavePanel setAccessoryView: saveDialogCustomView];	// add our custom view
-	[inSavePanel setRequiredFileType: @"txt"];
+	[inSavePanel setAllowedFileTypes:[NSArray arrayWithObjects:(NSString *)kUTTypePlainText, nil]];
 	[inSavePanel setNameFieldLabel:@"FILE NAME:"];			// override the file name label
 	
 	savePanel = inSavePanel;	// keep track of the save panel for later

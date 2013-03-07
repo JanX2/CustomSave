@@ -50,7 +50,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 
 #import <Cocoa/Cocoa.h>
 
-@interface MyDocument : NSDocument
+@interface MyDocument : NSDocument <NSOpenSavePanelDelegate>
 {
     id					textView;
     NSData*				model;
