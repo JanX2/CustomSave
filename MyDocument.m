@@ -55,52 +55,52 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 // windowNibName:
 // -------------------------------------------------------------------------------
-- (NSString*)windowNibName
+- (NSString *)windowNibName
 {
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers,
+	// Override returning the nib file name of the document
+	// If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers,
 	// you should remove this method and override -makeWindowControllers instead.
-    // ..
+	// ..
 	return @"MyDocument";
 }
 
 // -------------------------------------------------------------------------------
 // windowControllerDidLoadNib:aController
 // -------------------------------------------------------------------------------
-- (void)windowControllerDidLoadNib:(NSWindowController*)aController
+- (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
-    [super windowControllerDidLoadNib:aController];
-	
-    // Add any code here that need to be executed once the windowController has loaded the document's window.
+	[super windowControllerDidLoadNib:aController];
+
+	// Add any code here that need to be executed once the windowController has loaded the document's window.
 	// ..
 
 	// the following code adds the horizontal scroll bar to the scroll view and makes the text view horizontally
 	// resizable so it can display text of any width:
 	//
-	NSRect		frameRect;
-	NSWindow*	theWindow = [(NSView*)textView window];
-	
+	NSRect frameRect;
+	NSWindow *theWindow = [(NSView *)textView window];
+
 	//frameRect = [(NSView*)textView frame];
 
-	NSScrollView* scrollview = [textView enclosingScrollView];
-	
+	NSScrollView *scrollview = [textView enclosingScrollView];
+
 	NSSize contentSize = [scrollview contentSize];
 	[scrollview setBorderType:NSNoBorder];
 	[scrollview setHasVerticalScroller:YES];
-	[scrollview setHasHorizontalScroller:YES];	// for horizontal scrolling
-	
+	[scrollview setHasHorizontalScroller:YES];    // for horizontal scrolling
+
 	[scrollview setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-	frameRect = NSMakeRect(0,0, contentSize.width, contentSize.height);
+	frameRect = NSMakeRect(0, 0, contentSize.width, contentSize.height);
 	[textView setFrame:frameRect];
 
 	[textView setMinSize:NSMakeSize(contentSize.width, contentSize.height)];
 	[textView setMaxSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];
-	
+
 	[textView setVerticallyResizable:YES];
-	[textView setHorizontallyResizable:YES];	// for horizontal scrolling
-	[textView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];	// for horizontal scrolling
-	[[textView textContainer] setContainerSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];	// for horizontal scrolling
-	[[textView textContainer] setWidthTracksTextView:NO];						// for horizontal scrolling
+	[textView setHorizontallyResizable:YES];    // for horizontal scrolling
+	[textView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];    // for horizontal scrolling
+	[[textView textContainer] setContainerSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];    // for horizontal scrolling
+	[[textView textContainer] setWidthTracksTextView:NO];                        // for horizontal scrolling
 
 	[scrollview setDocumentView:textView];
 	[theWindow setContentView:scrollview];
@@ -117,7 +117,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 {
 	// return a data object that contains the contents of the document
 	[self updateModel];
-    return model;
+	return model;
 }
 
 // -------------------------------------------------------------------------------
@@ -126,27 +126,27 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
 	// set the contents of this document by reading from data of a specified type
-	[self setModel: data];
-    [self updateView];
-    return YES;
+	[self setModel:data];
+	[self updateView];
+	return YES;
 }
 
 // -------------------------------------------------------------------------------
 // model:
 // -------------------------------------------------------------------------------
-- (NSData*)model
+- (NSData *)model
 {
-    return model;
+	return model;
 }
 
 // -------------------------------------------------------------------------------
 // setModel:value
 // -------------------------------------------------------------------------------
-- (void)setModel:(NSData*)value
+- (void)setModel:(NSData *)value
 {
-    [value retain];
-    [model release];
-    model = value;
+	[value retain];
+	[model release];
+	model = value;
 }
 
 // -------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 - (NSRange)entireRange
 {
-    return NSMakeRange(0,[[textView string] length]);
+	return NSMakeRange(0, [[textView string] length]);
 }
 
 // -------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 - (void)updateModel
 {
-    [self setModel: [textView RTFFromRange: [self entireRange]]];
+	[self setModel:[textView RTFFromRange:[self entireRange]]];
 }
 
 // -------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 - (void)updateView
 {
-    [textView replaceCharactersInRange: [self entireRange] withRTF: [self model]];
+	[textView replaceCharactersInRange:[self entireRange] withRTF:[self model]];
 }
 
 
@@ -181,24 +181,24 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 // -------------------------------------------------------------------------------
 // Invoked by runModalSavePanel to do any customization of the Save panel savePanel.
 //
-- (BOOL)prepareSavePanel:(NSSavePanel*)inSavePanel
+- (BOOL)prepareSavePanel:(NSSavePanel *)inSavePanel
 {
 	// here we explicitly want to always start in the user's home directory,
 	// If we don't set this, then the save panel will remember the last visited
 	// directory, which is generally preferred.
 	//
 	[inSavePanel setDirectoryURL:[NSURL fileURLWithPath:NSHomeDirectory()]];
-	
-	[inSavePanel setDelegate: self];	// allows us to be notified of save panel events
-	
+
+	[inSavePanel setDelegate:self];    // allows us to be notified of save panel events
+
 	[inSavePanel setMessage:@"This is a customized save dialog for saving text files:"];
-	[inSavePanel setAccessoryView: saveDialogCustomView];	// add our custom view
+	[inSavePanel setAccessoryView:saveDialogCustomView];    // add our custom view
 	[inSavePanel setAllowedFileTypes:[NSArray arrayWithObjects:(NSString *)kUTTypePlainText, nil]];
-	[inSavePanel setNameFieldLabel:@"FILE NAME:"];			// override the file name label
-	
-	savePanel = inSavePanel;	// keep track of the save panel for later
-	
-    return YES;
+	[inSavePanel setNameFieldLabel:@"FILE NAME:"];            // override the file name label
+
+	savePanel = inSavePanel;    // keep track of the save panel for later
+
+	return YES;
 }
 
 // -------------------------------------------------------------------------------
@@ -234,19 +234,15 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 - (BOOL)panel:(id)sender isValidFilename:(NSString *)filename
 {
 	BOOL result = YES;
-	
-	NSURL* url = [NSURL fileURLWithPath: filename];
-	if (url && [url isFileURL])
-	{
-		NSArray* pathPieces = [[url path] pathComponents];
-		NSString* actualFilename = [pathPieces objectAtIndex:[pathPieces count]-1];
-		if ([actualFilename isEqual:@"text.txt"])
-		{
-			NSAlert *alert = [NSAlert alertWithMessageText: @"Cannot save a file name titled \"text\"."
-								 defaultButton: @"OK"
-							   alternateButton: nil
-								   otherButton: nil
-					 informativeTextWithFormat: @"Please pick a new name."];
+
+	NSURL *url = [NSURL fileURLWithPath:filename];
+	if (url && [url isFileURL]) {
+		NSArray *pathPieces = [[url path] pathComponents];
+		NSString *actualFilename = [pathPieces objectAtIndex:[pathPieces count] - 1];
+		if ([actualFilename isEqual:@"text.txt"]) {
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Cannot save a file name titled \"text\"."
+											 defaultButton:@"OK"
+										   alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please pick a new name."];
 			[alert runModal];
 			result = NO;
 		}
@@ -266,12 +262,11 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 // In this particular case, we arbitrarily add a "!" to the end of the file name.
 //
-- (NSString*)panel:(id)sender userEnteredFilename:(NSString*)filename confirmed:(BOOL)okFlag
+- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
 {
-	if (okFlag && [appendCheck state])
-	{
-		NSString* fileBaseName = [filename stringByDeletingPathExtension];
-		NSString* fileNameExtension = [filename pathExtension];
+	if (okFlag && [appendCheck state]) {
+		NSString *fileBaseName = [filename stringByDeletingPathExtension];
+		NSString *fileNameExtension = [filename pathExtension];
 		return [[fileBaseName stringByAppendingString:@"!"] stringByAppendingPathExtension:fileNameExtension];
 	}
 	return filename;
@@ -287,16 +282,15 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (void)panel:(id)sender willExpand:(BOOL)expanding
 {
-	if ([soundOnCheck state])
-	{
+	if ([soundOnCheck state]) {
 		if (expanding)
 			[[NSSound soundNamed:@"Pop"] play];
 		else
 			[[NSSound soundNamed:@"Blow"] play];
 	}
-	
+
 	// package navigation doesn't apply for the shrunk/simple dialog
-	[navigatePackages setHidden: !expanding];
+	[navigatePackages setHidden:!expanding];
 }
 
 // -------------------------------------------------------------------------------
@@ -332,7 +326,7 @@ Copyright © 2007 Apple Inc., All Rights Reserved
 //
 - (IBAction)filePackagesAsDirAction:(id)sender
 {
-	[savePanel setTreatsFilePackagesAsDirectories: [sender state]];
+	[savePanel setTreatsFilePackagesAsDirectories:[sender state]];
 }
 
 @end
