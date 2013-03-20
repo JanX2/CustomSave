@@ -200,7 +200,7 @@ const int kBadFileName			= 1001;
 #pragma mark Save Dialog Stuff
 
 // -------------------------------------------------------------------------------
-// prepareSavePanel:inSavePanel:
+// prepareSavePanel:
 // -------------------------------------------------------------------------------
 // Invoked by runModalSavePanel to do any customization of the Save panel savePanel.
 //
@@ -226,7 +226,7 @@ const int kBadFileName			= 1001;
 }
 
 // -------------------------------------------------------------------------------
-// compareFilename:name1:name2:caseSensitive:
+// compareFilename:with:caseSensitive:
 // -------------------------------------------------------------------------------
 // Controls the ordering of files presented by the NSSavePanel object sender.
 //
